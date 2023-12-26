@@ -6,6 +6,7 @@ using namespace std;
 int base; //co so cua ma huffman
 unordered_map <string, double> Source; //nguon ban dau, gom cac tin va phan bo xac suat
 unordered_map <string, string> Code; //ma Huffman cua nguon
+unordered_map <string, string> Code1; //ma Huffman cua nguon
 //-----------------------------TASK_1-----------------------------
 //cau truc so sanh xac suat trong hang doi uu tien
 struct CustomComparator {
@@ -109,6 +110,7 @@ void generate_huffman_code(){
 	cout << " Information	Huffman code\n";
 	cout << "+---------------------------+\n";
 	for (auto pair : Code) {
+		Code1[pair.second]=pair.first;
 		cout << " " << pair.first << "\t\t" << pair.second << '\n';
 		cout << "+---------------------------+\n";
 	}
@@ -154,12 +156,52 @@ void sequence_process(){
 }
 
 //---------------------------END_TASK_2---------------------------
+
+//-------------------------BEGIN_TASK_3---------------------------
+string mahuffman;//luu tru ma huffman
+void input(){//ham nhap ma huffman
+	cout<<"Nhap ma huffman: ";
+	cin.ignore();
+	getline(cin,mahuffman);
+}
+//giai ma huffman
+void decodeMessage(string code) {
+    string decodedMessage = "";
+    int d=code.length();
+    string str="";
+    for(int i=0;i<d;++i){
+    	
+    	
+    		str=str+code[i];
+    		auto it= Code1.find(str);
+    		
+    		if(it!=Code1.end()){
+    			decodedMessage=decodedMessage+it->second;
+    			str="";
+			}
+		
+    	
+		
+
+		
+		//cout<<decodedMessage<<" ";
+		
+	}
+    cout<<"Giai ma huffman: "<<decodedMessage;
+    
+}
+//---------------------------END_TASK_3---------------------------
+
+
 int main(){
 	input_processor();
 	show_huffman_code();
 
 	input_sequence();
 	sequence_process();
+	
+	input();
+	decodeMessage(mahuffman);
 	return 0;
 }
 

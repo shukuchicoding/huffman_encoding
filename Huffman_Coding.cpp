@@ -133,9 +133,33 @@ void input_processor(){
 }
 //---------------------------END_TASK_1---------------------------
 
+//-------------------------BEGIN_TASK_2---------------------------
+
+string sequence; // bản tin cần mã hóa
+string hufmfman_sequence;// bản tin sau khi mã hóa
+
+void input_sequence(){
+	cin.ignore();//tránh trôi lệnh
+	cout << "Input sequence is: ";
+	getline(cin,sequence);
+}
+
+void sequence_process(){
+	hufmfman_sequence="";
+	for (int i=0;i< sequence.length(); i++){
+		string tmp = sequence.substr(i,1);
+		hufmfman_sequence += Code[tmp];
+	}
+	cout << hufmfman_sequence;
+}
+
+//---------------------------END_TASK_2---------------------------
 int main(){
 	input_processor();
 	show_huffman_code();
+
+	input_sequence();
+	sequence_process();
 	return 0;
 }
 

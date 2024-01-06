@@ -146,6 +146,7 @@ string huffman_sequence;// bản tin sau khi mã hóa
 void input_sequence(){
 	cout << "Input sequence is: ";
 	getline(cin,sequence);
+	
 }
 
 //Kiểm tra sự tồn tại của các tin trong chuỗi tin được nhập vào 
@@ -169,7 +170,7 @@ void sequence_process(){
 		string tmp = sequence.substr(i,1);
 		huffman_sequence += Code[tmp];
 	}
-	cout << huffman_sequence;
+	cout<<"Ma hufman la:" << huffman_sequence<<endl;
 }
 
 //---------------------------END_TASK_2---------------------------
@@ -178,8 +179,9 @@ void sequence_process(){
 string mahuffman;//luu tru ma huffman
 void input(){//ham nhap ma huffman
 	cout<<"Nhap ma huffman: ";
-	cin.ignore();
+//	cin.ignore();
 	getline(cin,mahuffman);
+	
 }
 //giai ma huffman
 void decodeMessage(string code) {
@@ -197,14 +199,10 @@ void decodeMessage(string code) {
     			str="";
 			}
 		
-    	
-		
-
-		
 		//cout<<decodedMessage<<" ";
 		
 	}
-    cout<<"Giai ma huffman: "<<decodedMessage;
+    cout<<"Giai ma huffman: "<<decodedMessage<<endl;
     
 }
 //---------------------------END_TASK_3---------------------------
@@ -217,8 +215,12 @@ int main(){
 	cin.ignore();//tránh trôi lệnh
 	sequence_process();
 	
-	input();
-	decodeMessage(mahuffman);
+	
+	decodeMessage(huffman_sequence);
+	
+
+	
+	
 	return 0;
 }
 

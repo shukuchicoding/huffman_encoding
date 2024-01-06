@@ -7,6 +7,8 @@ int base; //co so cua ma huffman
 unordered_map <string, double> Source; //nguon ban dau, gom cac tin va phan bo xac suat
 unordered_map <string, string> Code; //ma Huffman cua nguon
 unordered_map <string, string> Code1; //ma Huffman cua nguon
+unordered_map <string, bool> exist;//Luu tru su ton tai cua nguon tin
+
 //-----------------------------TASK_1-----------------------------
 //cau truc so sanh xac suat trong hang doi uu tien
 struct CustomComparator {
@@ -57,6 +59,7 @@ void input_source(){
 		cout << "\tInformation " << Source.size() + 1 << ": ";
 		string info;
 		cin >> info;
+		exist[info] = true;
 		cout << "\tProbability " << Source.size() + 1 << ": ";
 		double prob;
 		cin >> prob;
@@ -138,21 +141,35 @@ void input_processor(){
 //-------------------------BEGIN_TASK_2---------------------------
 
 string sequence; // bản tin cần mã hóa
-string hufmfman_sequence;// bản tin sau khi mã hóa
+string huffman_sequence;// bản tin sau khi mã hóa
 
 void input_sequence(){
-	cin.ignore();//tránh trôi lệnh
 	cout << "Input sequence is: ";
 	getline(cin,sequence);
 }
 
+//Kiểm tra sự tồn tại của các tin trong chuỗi tin được nhập vào 
+bool check(string sequence){
+	for (int i =0;i<sequence.length();i++){
+		if (exist[sequence.substr(i,1)] == false)
+			return false;
+	}
+	return true;
+}
+
 void sequence_process(){
-	hufmfman_sequence="";
+	input_sequence();
+	while (!check(sequence)){
+		cout<<"Your sequence contains (an) unidentified character(s). Please check again!\n";
+		input_sequence();
+	}
+
+	huffman_sequence="";
 	for (int i=0;i< sequence.length(); i++){
 		string tmp = sequence.substr(i,1);
-		hufmfman_sequence += Code[tmp];
+		huffman_sequence += Code[tmp];
 	}
-	cout << hufmfman_sequence;
+	cout << huffman_sequence;
 }
 
 //---------------------------END_TASK_2---------------------------
@@ -197,7 +214,7 @@ int main(){
 	input_processor();
 	show_huffman_code();
 
-	input_sequence();
+	cin.ignore();//tránh trôi lệnh
 	sequence_process();
 	
 	input();

@@ -143,7 +143,7 @@ void generate_huffman_code()
     {
         source.push({pair.first, pair.second});
     }
-
+	//danh sach dinh ke cua cac node trong cay base_phan, chi gom 1 node duy nhat hoac khong co node nao
     unordered_map <string, vector <pair <string, string>>> adj;
     int num_r_info = Source.size();
     cout << "Base of Huffman code: ";
@@ -152,15 +152,17 @@ void generate_huffman_code()
     if ((num_r_info-base) % (base-1)) a++;
     int num_newsource = base + a*(base-1);
     int num_i_info = num_newsource - num_r_info;
-    for (int i = 1; i <= num_i_info; i++)
+    
+	for (int i = 1; i <= num_i_info; i++)
     {
         source.push({"i" + to_string(i+1), 0});
     }
-
+	//tao cay base_phan day du
     while (source.size() > 1)
     {
-        double tmp_prob = base_min_sum(source);
         string tmp_info = base_min_label(source);
+		double tmp_prob = base_min_sum(source);
+        
         for (int i = 0; i < base; i++)
         {
 			adj[source.top().first].push_back({tmp_info, to_string(i)});
@@ -168,7 +170,7 @@ void generate_huffman_code()
         }
         source.push({tmp_info, tmp_prob});
     }
-
+	//doc tu goc xuong la de tim ma huffman cho la
     for (auto pair : Source)
     {
         string p = pair.first;
@@ -226,7 +228,7 @@ string huffman_sequence; //ban tin sau khi ma hoa
 void input_sequence()
 {
     cout << "\nInput sequence is: ";
-    getline(cin,sequence);
+    cin.ignore();
     getline(cin,sequence);
 }
 

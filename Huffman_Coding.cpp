@@ -84,7 +84,7 @@ void check_input(string Info, double Prob)
         cout << "Invalid probability. Try again:\n";
     else
     {
-        if(sum_probs(Source) + Prob > 1)
+        if(sum_probs(Source) + Prob > 1.0001)
             cout << "Total probability of informations is greater than 1. Try again:\n";
         else
         {
@@ -122,7 +122,7 @@ void input_source()
 {
     reset_data();
     cout << "Input your information source\n";
-    while (sum_probs(Source) != 1)
+    while (sum_probs(Source) <=0.9999)
     {
         cout << "\tInformation " << Source.size() + 1 << ": ";
         string info;
@@ -275,7 +275,7 @@ void input() //ham nhap ma huffman
 
 }
 //giai ma huffman
-void decodeMessage(string code)
+int  decodeMessage(string code)
 {
     string decodedMessage = "";
     int d=code.length();
@@ -291,7 +291,13 @@ void decodeMessage(string code)
             str="";
         }
     }
-    cout<< "Huffman decode: "<<decodedMessage<<endl<<"\n";
+    if(str=="") {
+    	
+		cout<< "Huffman decode: "<<decodedMessage<<endl<<"\n";
+		return 1;
+	}
+    else cout<<"Nhap lai ma huffman:\n";
+    return 0;
 
 }
 //---------------------------END_TASK_3---------------------------
@@ -324,6 +330,7 @@ int main()
         displaymenu();
         cout << "Enter your choice: ";
         cin >> option;
+        int q;
         switch (option)
         {
         case 1:
@@ -363,7 +370,12 @@ int main()
             break;
         case 3:
             input();
-            decodeMessage(mahuffman);
+			 q=decodeMessage(mahuffman);
+            while(q==0){
+            	input();
+            	q=decodeMessage(mahuffman);
+            	cin.ignore();
+			}
             break;
         case 4:
             cout << "Exiting...\n";

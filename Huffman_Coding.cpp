@@ -270,8 +270,8 @@ void input() //ham nhap ma huffman
 {
     cout<< "\nEnter Huffman Code: ";
 
-	cin.ignore();
-    getline(cin,mahuffman);
+	//cin.ignore();
+    cin>>mahuffman;
 
 }
 //giai ma huffman
@@ -374,7 +374,7 @@ int main()
             while(q==0){
             	input();
             	q=decodeMessage(mahuffman);
-            	cin.ignore();
+            	//cin.ignore();
 			}
             break;
         case 4:
